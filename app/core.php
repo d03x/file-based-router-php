@@ -19,6 +19,6 @@ if (!session_id()) {
     ]);
 }
 //include('functions/router.php');
-include("functions/router.func.php");
+include("functions/requests/router.php");
 //for handler all request yng masuk
 include_once("request-handler.php");

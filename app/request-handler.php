@@ -5,8 +5,10 @@ if (($position = strpos($request_uri, '.php'))) {
     $request_uri = str_replace($uri, '', $request_uri);
 }
 
-handleRoute(
+$content = resolveRoute(
     $request_uri,
-    $_SERVER['REQUEST_METHOD'],
-    ROOT_DIR . DS . "app" . DS . "pages"
+    strtolower($_SERVER['REQUEST_METHOD']),
+    ROOT_DIR . DS . "routes"
 );
+
+echo str_replace("%SCRIPT%", embed_script_to("/public/assets/bundle.js"), $content);

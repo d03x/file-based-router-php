@@ -1,0 +1,10 @@
+{
+	"type": "module",
+	"scripts": {
+		"build": "rolldown --watch -c"
+	},
+	"dependencies": {
+		"axios": "^1.7.9",
+		"rolldown": "1.0.0-beta.3"
+	}
+}
