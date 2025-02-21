@@ -1,0 +1,17 @@
+{
+  "name": "dadandev/skeeptalk.com",
+  "description": "Skeeettalk app",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "SkeepTalk\\Platform\\": "app/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Dadan Hidayat",
+      "email": "dadanhidyt@gmail.com"
+    }
+  ],
+  "require": {}
+}
