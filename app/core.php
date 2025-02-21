@@ -1,9 +1,5 @@
 <?php
 
-/**
- * @author dadan hidayat
- */
-
 use SkeepTalk\Platform\Engine\Registry;
 use SkeepTalk\Platform\Engine\Router;
 use SkeepTalk\Platform\Engine\Session;
@@ -19,8 +15,8 @@ if (!file_exists(COMPOSER_FILE)) {
 }
 include_once(COMPOSER_FILE);
 //start session for global
-
-//################# REGISTER ALL MODULE TO REGISTRY ##########################
+\Dotenv\Dotenv::createImmutable(ROOT_DIR)->safeLoad();
+//register all component registry
 $registry = Registry::instance();
 $registry->session = new Session;
 //start session
