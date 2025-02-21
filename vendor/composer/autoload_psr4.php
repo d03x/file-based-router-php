@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Dadandev\\SkeeptalkCom\\' => array($baseDir . '/src'),
+    'SkeepTalk\\Platform\\' => array($baseDir . '/app'),
 );
