@@ -5,7 +5,6 @@ namespace SkeepTalk\Platform\Engine;
 class Router
 {
     protected $paramsPattern = '/\[(.*?)\]/';
-
     public Registry $app;
     public array $params = [];
     public function __construct(Registry $registry)
@@ -75,9 +74,7 @@ class Router
         }
         $_GET = array_merge($_GET, $params);
         if (file_exists($filename)) {
-            ob_start();
             require $filename;
-            return ob_get_clean();
         } else {
             echo "Page Not Found";
         }

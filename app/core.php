@@ -24,8 +24,9 @@ $registry->session->start();
 $registry->template = new Template;
 $registry->config = require("app.config.php");
 $registry->router = new Router($registry);
+include "functions/global.php";
 //render router content
-echo ($registry->router->resolve(
+$registry->router->resolve(
     strtolower($_SERVER['REQUEST_METHOD']),
     $registry->config['routes_directory']
-));
+);

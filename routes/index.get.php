@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+if ($_GET['dadan'] == "gelo") {
+    $data = ["dadan" => "GELO"];
+} else {
+    $data = ["dadan" => "TIDAK GELO"];
+}
+$data['title'] = "aktif";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work!</title>
-</head>
 
-<body>
-    Work!
-</body>
-
-</html>
+//render view
+view('home.index',$data);
