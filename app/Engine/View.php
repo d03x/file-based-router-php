@@ -4,16 +4,35 @@ namespace SkeepTalk\Platform\Engine;
 
 use Exception;
 
-class Template
+class View
 {
     public $layout = null;
     public $sections = [];
+    public $extensions = [
+        '.view.php',
+        '.php',
+        '.blade.php',
+        '.tpl.php'
+    ];
     public $data = [];
     public $sectionStack = [];
     public function startSection(string $name)
     {
         $this->sectionStack[] = $name;
         ob_start();
+    }
+
+    public function find($view)
+    {
+        $view = str_replace('.', DS, $view);
+
+        foreach ($this->extensions as $file) {
+            $fullpath = $this->getViewPath() . DS . $view . $file;
+            if (file_exists($fullpath)) {
+                return $fullpath;
+            }
+        }
+        throw new Exception("File {$view} Not found");
     }
 
     public function endSection()
@@ -27,14 +46,6 @@ class Template
         $this->sections[$section][] = $content;
     }
 
-    public function compileFileNameAnotation(string $string)
-    {
-        $path_with_anotaion = "";
-        foreach (array_filter(explode('.', $string)) as $key => $value) {
-            $path_with_anotaion .= DS . $value;
-        }
-        return $path_with_anotaion;
-    }
     public function renderSection(string $name)
     {
         if (!isset($this->sections[$name])) {
@@ -49,40 +60,34 @@ class Template
         }
         return $output;
     }
+    public function getViewPath()
+    {
+        return ROOT_DIR . DS . "resources" . DS . "views";
+    }
     public function extend(string $filename)
     {
-        $this->layout = $this->compileFileNameAnotation($filename);
+        $this->layout = $filename;
     }
     /**
      * @param $view
      */
     public function render(string $view, $data = [])
     {
-        $start = microtime(true);
         $this->data = array_merge($this->data, $data);
-        $view = $this->compileFileNameAnotation($view);
+        $filename = $this->find($view);
+        $output = (function () use ($filename) {
+            extract($this->data);
+            ob_start();
+            include $filename;
+            return ob_get_clean();
+        })();
 
-
-        $filename = ROOT_DIR . DS . "resources" . DS . "views" . DS . $view . ".view.php";
-        if (file_exists($filename)) {
-            $output = (function () use ($filename) {
-                extract($this->data);
-                ob_start();
-                include $filename;
-                return ob_get_clean();
-            })();
-
-            if ($this->layout && $this->sectionStack === []) {
-                $layoutview = $this->layout;
-                $this->layout = null;
-                $output = $this->render($layoutview, $data);
-            }
-        } else {
-            throw new Exception($filename . " not found");
+        if ($this->layout && $this->sectionStack === []) {
+            $layoutview = $this->layout;
+            $this->layout = null;
+            $output = $this->render($layoutview, $data);
         }
         $this->data = null;
-        $executeTime =  (microtime(true) - $start);
-        $output = "<!--- $executeTime --->" . $output;
         return $output;
     }
 }

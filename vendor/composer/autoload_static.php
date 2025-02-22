@@ -13,6 +13,10 @@ class ComposerStaticInitcd987b8384c06c394ab249f8533f53e4
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Whoops\\' => 7,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -22,6 +26,7 @@ class ComposerStaticInitcd987b8384c06c394ab249f8533f53e4
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'PhpOption\\' => 10,
         ),
         'G' => 
@@ -35,6 +40,10 @@ class ComposerStaticInitcd987b8384c06c394ab249f8533f53e4
     );
 
     public static $prefixDirsPsr4 = array (
+        'Whoops\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -50,6 +59,10 @@ class ComposerStaticInitcd987b8384c06c394ab249f8533f53e4
         'SkeepTalk\\Platform\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
         ),
         'PhpOption\\' => 
         array (

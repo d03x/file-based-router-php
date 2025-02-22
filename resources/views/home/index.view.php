@@ -1,4 +1,4 @@
-<?php $this->extend('layout.home'); ?>
+<?php $this->extend('layout.global'); ?>
 <?php $this->startSection('home'); ?>
 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt, magni. Quae, eius possimus eos laudantium doloribus quia. Cupiditate voluptate tempore rem cum, aperiam, cumque accusantium iusto dicta consectetur pariatur voluptatum.
 <?php $this->endSection(); ?>
